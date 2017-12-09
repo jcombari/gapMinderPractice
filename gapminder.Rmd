@@ -38,3 +38,17 @@ ggplot(gapminder_1952) +
 ```
 
 5: Hace un peque√±o descripci√≥n de este plot
+
+
+## Gr·fico adicional 
+
+Estudio de esperanza de vida por aÒo
+
+```{r include=TRUE, echo=FALSE}
+ggplot(gapminder) + 
+  geom_boxplot(aes(factor(year), lifeExp))
+```
+
+### Conclusion 
+
+Del grafico anterior podemos decir que de manera gloabal la esperanza de vida ha aumentado a medida que avanza el tiempo. 
