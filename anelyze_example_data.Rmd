@@ -6,12 +6,14 @@ output: html_notebook
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+library(lubridate)
 ```
 #Read xlxs
 
 ```{r}
 
-excel <- read_xlsx("data/datos.xlsx")
+excel <- read_excel("data/datos.xlsx", col_types= c("numeric", "text", "date", "text", "numeric", "text", "numeric",
+"numeric", "numeric", "numeric", "numeric", "numeric"))
 
 
 
@@ -33,8 +35,16 @@ print(summary(new_dat$incumplio == 1))
 
 ```{r}
 ggplot(new_dat, aes(TIPO,PAGO)) +
-  geom_point() +
-  #facet_wrap(~continent) +
-  labs(title = "Tipos de pago")
+  geom_boxplot() +
+   labs(title = "Tipos de pago")
+```
+
+# plOt para verificar los meses con pagos mas altos dentro de la data
+
+```{r}
+
+ggplot(new_dat %>% na.omit(), aes(factor(month(FECHA, label = TRUE)),PAGO)) +
+  geom_boxplot() +
+   labs(title = "PAGOS POR MES")
 ```
 
