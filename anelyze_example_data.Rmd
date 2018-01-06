@@ -11,18 +11,22 @@ library(lubridate)
 #Read xlxs
 
 ```{r}
-
 excel <- read_excel("data/datos.xlsx", col_types= c("numeric", "text", "date", "text", "numeric", "text", "numeric",
 "numeric", "numeric", "numeric", "numeric", "numeric"))
 
+datos_tidy <- excel %>% 
+  mutate (
+    acreedor = case_when(
+      SALUD == 1 ~"salud",
+      BANCO==1 ~ "banco",
+      PENSION==1  ~ "pension",
+      VIAJES==1  ~ "viajes",
+      DEUDAS==1  ~ "deudas",
+      TRUE ~ "no asignado"
+    )
+ )
 
-
-
-new_dat <- excel %>%
-  mutate(no_asignados = ifelse(SALUD + OTROS + VIAJES + DEUDAS + BANCO == 1, 0, 1)) %>%
-  mutate(error_asig   = ifelse(SALUD + OTROS + VIAJES + DEUDAS + BANCO > 1,TRUE, FALSE)) %>%
-  mutate(incumplio    = ifelse(SALUD + OTROS + VIAJES + DEUDAS + BANCO == 1 & PAGO == 0,1, 0))
-
+saveRDS(datos_tidy, "data/data_tidy.rds")
 ```
 
 #cuantos 
