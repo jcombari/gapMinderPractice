@@ -1,9 +1,32 @@
 ---
 title: "R Notebook"
 output: html_notebook
----
+--- 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
+
+### Importar archivo
+
+```{r, include=FALSE}
+library(readxl)
+
+datos<-read_excel("C:/Users/Jennyfer Combariza/Desktop/varios/Diplomado Big Data/Clase10_17.12.09  Desarrollo de aplicaciones  big data  R/Rgit/gapMinderPractice/datos.xlsx")
+
+```
+
+### Dudas
+
+Estimado señor experto al revisar su archivo surgen las siguientes dudas:
+
+1. ¿La variable Fecha es relevante para el estudio?.
+1. Todos los clientes deben tener asociados un gasto? COnsulto esto porque existen clientes que no tienen asociado ningun gasto pero si reflejan un pago. En este orden de ideas le sugiero crear una nueva variable otros2 que asumirá el valor de 1 en cada uno de estos casos.
+
+1. ¿Un pago debe proceder de solo 1 causal por mes? 
+
+### Despedida 
+
+Agradecemos una respuesta sobre las dudas.
+Quedo muy atenta.
