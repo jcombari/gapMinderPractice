@@ -27,7 +27,7 @@ gapminder %>%
   select (continent, gdpPercap, year, country) %>%
   ggplot (aes(x=country, y=gdpPercap,fill=year)) + 
   geom_bar(stat="identity", position="dodge") +
-  labs(x = "x label")
+  labs(x = "Paises con mayor densidad de poblaciòn")
 
   
 ```
