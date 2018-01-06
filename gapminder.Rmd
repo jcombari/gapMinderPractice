@@ -54,12 +54,32 @@ ggplot(gapminder) +
 
 Del grafico anterior podemos decir que de manera global la esperanza de vida ha aumentado a medida que avanza el tiempo. 
 
-# Mi text para hacer conflicts
+## Gráfico adicional para Europa
 
-conflicts
-conflictsconflicts
-conflicts
-conflicts
-conflicts
-conflicts
+Estudio de esperanza de vida por año
 
+```{r include=TRUE, echo=FALSE}
+
+gapminder_europe <- gapminder %>%
+  filter(continent == "Europe")
+
+ggplot(gapminder_europe) + 
+  geom_boxplot(aes(factor(year), lifeExp)) + 
+  labs(x = "año", y = "Esperanza de vida", title = "La esperanza de vida en Europa ha aumentado a medida que avanza el tiempo. ")
+```
+### Conclusion Europa
+
+Del grafico anterior podemos decir que de manera global la esperanza de vida en Europa, ha aumentado a medida que avanza el tiempo. Sin embargo, la esperanza de vida es superior al consolidado.
+
+### Anàlisis de todos los continentes
+
+```{r include=TRUE, echo=FALSE}
+ggplot(gapminder) + 
+  geom_boxplot(aes(factor(year), lifeExp)) +
+  facet_wrap(~continent) + 
+  ylim(0, 80) +
+  labs(x = "año", y = "Esperanza de vida", title = "La esperanza de vida por continente. ")
+```
+  ### Conclusion Europa
+
+Del grafico anterior podemos decir que de manera global la esperanza de vida en la mayoría de los continentes (a excepción de Africa), ha aumentado a medida que avanza el tiempo. Para el continente Africano el percentil 75 de la esperanza de vida no ha superado los 60 años.
