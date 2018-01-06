@@ -63,8 +63,6 @@ gapminder %>%
   ggplot() + 
   geom_boxplot(aes(factor(year), lifeExp)) + 
   labs(x = "año", y = "Esperanza de vida", title = "La esperanza de vida en Europa ha aumentado a medida que avanza el tiempo. ")
-
-
 ```
 ### Conclusión Europa
 
@@ -82,18 +80,21 @@ ggplot(gapminder) +
 ### Conclusión Continentes
 
 Del grafico anterior podemos decir que de manera global la esperanza de vida en la mayoría de los continentes (a excepción de Africa), ha aumentado a medida que avanza el tiempo. Para el continente Africano el percentil 75 de la esperanza de vida no ha superado los 60 años.
-=======
-#country rank lifeExp
 
 ```{r}
-country5_by_conti <- gap1952 %>%
+country5_by_conti <- gapminder_1952 %>%
   group_by(continent) %>%
   top_n(n = 5, wt = lifeExp)
-    
 ```
+Top 5 expective countries by continent
+x axis : Continents and countries
+y axis Lifeexp
 
+conclusion :
+the continent with more exp is europe with mean 72 years for5 top countries when all these continents are under this age but
+rest contients have a brader range by example africa  between 47 and 52 life exp
 ```{r}
-    ggplot(country5_by_conti, aes(continent,lifeExp, label = country)) +
+ggplot(country5_by_conti, aes(continent,lifeExp, label = country)) +
   geom_point() +
   #facet_wrap(~continent) +
   geom_text(hjust=0, vjust=0)
