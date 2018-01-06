@@ -81,6 +81,8 @@ ggplot(gapminder) +
 
 Del grafico anterior podemos decir que de manera global la esperanza de vida en la mayoría de los continentes (a excepción de Africa), ha aumentado a medida que avanza el tiempo. Para el continente Africano el percentil 75 de la esperanza de vida no ha superado los 60 años.
 
+#country rank lifeExp
+
 ```{r}
 country5_by_conti <- gapminder_1952 %>%
   group_by(continent) %>%
