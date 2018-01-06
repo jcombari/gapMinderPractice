@@ -60,18 +60,19 @@ Estudio de esperanza de vida por año
 
 ```{r include=TRUE, echo=FALSE}
 
-gapminder_europe <- gapminder %>%
-  filter(continent == "Europe")
-
-ggplot(gapminder_europe) + 
+gapminder %>%
+  filter(continent == "Europe") %>%
+  ggplot() + 
   geom_boxplot(aes(factor(year), lifeExp)) + 
   labs(x = "año", y = "Esperanza de vida", title = "La esperanza de vida en Europa ha aumentado a medida que avanza el tiempo. ")
+
+
 ```
 ### Conclusion Europa
 
 Del grafico anterior podemos decir que de manera global la esperanza de vida en Europa, ha aumentado a medida que avanza el tiempo. Sin embargo, la esperanza de vida es superior al consolidado.
 
-### Anàlisis de todos los continentes
+### Análisis de todos los continentes
 
 ```{r include=TRUE, echo=FALSE}
 ggplot(gapminder) + 
