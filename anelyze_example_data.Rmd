@@ -9,39 +9,55 @@ library(tidyverse)
 ```
 #Read xlxs
 
+### Unificar las dummy en una sola variable
+
+```{r}
+
+excel <- read_xlsx("data/datos.xlsx")
+
+new_dat <- excel %>%
+
+mutate(ACREEDOR    = ifelse(
+  SALUD==1,"SALUD",ifelse(
+    PENSION==1, "PENSION", ifelse(
+      OTROS == 1 ,"OTROS",ifelse(
+        VIAJES==1,"VIAJES", ifelse(
+          DEUDAS==1, "DEUDAS",ifelse(BANCO==1, "BANCO","NO ASIGNADO")
+        )
+      )
+    )
+  )
+) 
+)
+
+
+
+
+```
+
+### METODO 2 PARA CREAR LA VARIABLE ACREEDOR
+
 ```{r}
 
 excel <- read_xlsx("data/datos.xlsx")
 
 
-
-
 new_dat <- excel %>%
-  mutate(no_asignados = ifelse(SALUD + OTROS + VIAJES + DEUDAS + BANCO == 1, 0, 1)) %>%
-  mutate(error_asig   = ifelse(SALUD + OTROS + VIAJES + DEUDAS + BANCO > 1,TRUE, FALSE)) %>%
-  mutate(incumplio    = ifelse(SALUD + OTROS + VIAJES + DEUDAS + BANCO == 1 & PAGO == 0,1, 0))
 
-```
-
-#cuantos 
-no_asignados : registros que no tienen una tipo de deudad asignado 
-error_asig   : verificar si el registro no tiene mas de 1 tipo de deuda
-incumplio    : validar si tiene una deuda pero no pago 
-```{r}
-print(summary(new_dat$incumplio == 1))
-```
+mutate(ACREEDOR    = case_when(
+  SALUD==1 ~ "SALUD", 
+  PENSION==1 ~ "PENSION", 
+  OTROS == 1 ~ "OTROS",
+  VIAJES==1 ~ "VIAJES",
+  DEUDAS==1 ~ "DEUDAS",
+  BANCO==1 ~ "BANCO",
+  SALUD==0 & PENSION==0 & OTROS == 0 &  VIAJES==0 &  DEUDAS==0 & BANCO==0 ~ "NO ASIGNADO"
+)
+)
 
 
-```{r include=TRUE, echo=FALSE}
-
-new_dat$MES <- factor(new_dat$MES, levels=c("ENERO", "FEBRERO","MARZO","ABRIL", "MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"), ordered=TRUE)
 
 
-ggplot(new_dat) + 
-  geom_boxplot(aes(factor(MES), PAGO)) +
- # facet_wrap(~continent) + 
-#  ylim(0, 80) +
-  labs(x = "mes", y = "PAGO", title = "Pago mensual recibido")
 ```
 
 
