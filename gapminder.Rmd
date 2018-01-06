@@ -4,6 +4,9 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
+
+
+
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(gapminder)
@@ -26,8 +29,9 @@ gapminder %>%
   top_n(1) %>%
   select (continent, gdpPercap, year, country) %>%
   ggplot (aes(x=country, y=gdpPercap,fill=year)) + 
-  geom_bar(stat="identity", position="dodge")
-  
+  geom_bar(stat="identity", position="dodge") +
+  labs(x = "x label")
+
   
 ```
 
@@ -59,6 +63,7 @@ ggplot(gapminder_1952) +
 ## Gráfico adicional 
 
 Estudio de esperanza de vida por a?o
+
 
 ```{r include=TRUE, echo=FALSE}
 ggplot(gapminder) + 
