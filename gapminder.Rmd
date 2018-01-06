@@ -97,5 +97,6 @@ rest contients have a brader range by example africa  between 47 and 52 life exp
 ggplot(country5_by_conti, aes(continent,lifeExp, label = country)) +
   geom_point() +
   #facet_wrap(~continent) +
-  geom_text(hjust=0, vjust=0)
+  geom_text(hjust=0, vjust=0) +
+  labs(title = "Top 5 countries by continent")
 ```
