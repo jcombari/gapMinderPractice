@@ -31,10 +31,17 @@ incumplio    : validar si tiene una deuda pero no pago
 print(summary(new_dat$incumplio == 1))
 ```
 
-```{r}
-ggplot(new_dat, aes(TIPO,PAGO)) +
-  geom_point() +
-  #facet_wrap(~continent) +
-  labs(title = "Tipos de pago")
+
+```{r include=TRUE, echo=FALSE}
+
+new_dat$MES <- factor(new_dat$MES, levels=c("ENERO", "FEBRERO","MARZO","ABRIL", "MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"), ordered=TRUE)
+
+
+ggplot(new_dat) + 
+  geom_boxplot(aes(factor(MES), PAGO)) +
+ # facet_wrap(~continent) + 
+#  ylim(0, 80) +
+  labs(x = "mes", y = "PAGO", title = "Pago mensual recibido")
 ```
+
 
