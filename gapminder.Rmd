@@ -17,7 +17,20 @@ gapminder_1952 <- gapminder %>%
   filter(year == 1952)
 ```
 
-2: Hace un plot de life expectancy (lifeExp) vs. population (pop)
+2. Nueva grafica
+
+```{r}
+gapminder %>% 
+  group_by(continent)  %>% 
+  arrange(desc(gdpPercap)) %>%
+  top_n(1) %>%
+  select (continent, gdpPercap, year, country) %>%
+  ggplot (aes(x=country, y=gdpPercap,fill=year)) + 
+  geom_bar(stat="identity", position="dodge") +
+  labs(x = "Paises con mayor densidad de poblaciÚn")
+```
+
+3: Hace un plot de life expectancy (lifeExp) vs. population (pop)
 
 ```{r}
 ggplot(gapminder_1952) +
@@ -38,6 +51,7 @@ ggplot(gapminder_1952) +
 ```
 
 5: Hace un peque√±o descripci√≥n de este plot
+
 ## Gr·fico adicional 
 
 Estudio de esperanza de vida por a?o
@@ -102,3 +116,5 @@ ggplot(country5_by_conti, aes(continent,lifeExp, label = country)) +
   geom_text(hjust=0, vjust=0) +
   labs(title = "Top 5 countries by continent")
 ```
+
+
