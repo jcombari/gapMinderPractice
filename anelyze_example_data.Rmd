@@ -7,3 +7,34 @@ output: html_notebook
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
+#Read xlxs
+
+```{r}
+
+excel <- read_xlsx("data/datos.xlsx")
+
+
+
+
+new_dat <- excel %>%
+  mutate(no_asignados = ifelse(SALUD + OTROS + VIAJES + DEUDAS + BANCO == 1, 0, 1)) %>%
+  mutate(error_asig   = ifelse(SALUD + OTROS + VIAJES + DEUDAS + BANCO > 1,TRUE, FALSE)) %>%
+  mutate(incumplio    = ifelse(SALUD + OTROS + VIAJES + DEUDAS + BANCO == 1 & PAGO == 0,1, 0))
+
+```
+
+#cuantos 
+no_asignados : registros que no tienen una tipo de deudad asignado 
+error_asig   : verificar si el registro no tiene mas de 1 tipo de deuda
+incumplio    : validar si tiene una deuda pero no pago 
+```{r}
+print(summary(new_dat$incumplio == 1))
+```
+
+```{r}
+ggplot(new_dat, aes(TIPO,PAGO)) +
+  geom_point() +
+  #facet_wrap(~continent) +
+  labs(title = "Tipos de pago")
+```
+
