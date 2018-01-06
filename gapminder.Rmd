@@ -28,10 +28,7 @@ gapminder %>%
   ggplot (aes(x=country, y=gdpPercap,fill=year)) + 
   geom_bar(stat="identity", position="dodge") +
   labs(x = "Paises con mayor densidad de poblaciÚn")
-
-  
 ```
-
 
 3: Hace un plot de life expectancy (lifeExp) vs. population (pop)
 
@@ -53,15 +50,11 @@ ggplot(gapminder_1952) +
   geom_point(aes(pop, lifeExp, color = continent, size = gdpPercap))
 ```
 
-
-
-
 5: Hace un peque√±o descripci√≥n de este plot
 
 ## Gr·fico adicional 
 
 Estudio de esperanza de vida por a?o
-
 
 ```{r include=TRUE, echo=FALSE}
 ggplot(gapminder) + 
