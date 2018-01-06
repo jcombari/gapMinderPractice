@@ -4,9 +4,6 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-
-
-
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(gapminder)
@@ -55,6 +52,7 @@ ggplot(gapminder_1952) +
 ggplot(gapminder_1952) +
   geom_point(aes(pop, lifeExp, color = continent, size = gdpPercap))
 ```
+
 
 
 
@@ -125,3 +123,5 @@ ggplot(country5_by_conti, aes(continent,lifeExp, label = country)) +
   geom_text(hjust=0, vjust=0) +
   labs(title = "Top 5 countries by continent")
 ```
+
+
