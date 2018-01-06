@@ -46,9 +46,10 @@ Estudio de esperanza de vida por año
 
 ```{r include=TRUE, echo=FALSE}
 ggplot(gapminder) + 
-  geom_boxplot(aes(factor(year), lifeExp))
+  geom_boxplot(aes(factor(year), lifeExp)) + 
+  labs(x = "año", y = "Esperanza de vida", title = "La esperanza de vida ha aumentado a medida que avanza el tiempo. ")
 ```
 
 ### Conclusion 
 
-Del grafico anterior podemos decir que de manera gloabal la esperanza de vida ha aumentado a medida que avanza el tiempo. 
+Del grafico anterior podemos decir que de manera global la esperanza de vida ha aumentado a medida que avanza el tiempo. 
