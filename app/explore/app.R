@@ -1,7 +1,7 @@
 library(shiny)
 library(tidyverse)
 library(lubridate)
-
+getwd()
 
 ui <- fluidPage(
    titlePanel("Pay by month"),
@@ -11,9 +11,14 @@ ui <- fluidPage(
         uiOutput("radio")
       ),
       mainPanel(
-         plotOutput("acreedor"),
-         tableOutput("totalGastado")
+         plotOutput("acreedor1"),
+         plotOutput("acreedor2"),
+         tableOutput("totalGastado"),
+                   textInput(inputId = "title", 
+                             label = "Escribe un nuevo título",
+                             value = "Grafico de gastos por mes ")
       )
+      
    )
 )
 
@@ -21,16 +26,23 @@ ui <- fluidPage(
 server <- function(input, output) {
   
   data <- readRDS("../../data/data_tidy.rds")
-   
-  output$acreedor <- renderPlot({
+  #data <- readRDS("../data/data_tidy.rds") 
+  output$acreedor1 <- renderPlot({
     if (!is.null(input$select_tipo)) {
       data_graph <- data %>%
         filter(TIPO %in% input$select_tipo)
       ggplot(data_graph, aes(factor(month(FECHA, label = TRUE)),PAGO, fill=acreedor)) +
         geom_boxplot() +
         scale_fill_hue(l=40, c=35)
-        
     }
+  })
+            
+  output$acreedor2 <- renderPlot({
+    data_graph <- data %>%
+        filter(MES %in% input$select_mes)
+      ggplot(data_graph) +
+        geom_boxplot(aes(acreedor, PAGO))+
+        labs(title = input$title) 
   })
   
   output$totalGastado <- renderTable({
@@ -39,8 +51,7 @@ server <- function(input, output) {
       arrange(desc(PAGO)) %>%
       select(RAZÓN, TIPO, PAGO, FECHA) %>%
       slice(1:5)
-  }
-  )
+  })
   
   
   output$radio <- renderUI({

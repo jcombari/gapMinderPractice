@@ -38,7 +38,7 @@ print(summary(new_dat$incumplio == 1))
 ```
 
 ```{r}
-ggplot(new_dat, aes(TIPO,PAGO)) +
+ggplot(new_dat, aes(acreedor,PAGO)) +
   geom_boxplot() +
    labs(title = "Tipos de pago")
 ```
