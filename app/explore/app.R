@@ -8,7 +8,8 @@ ui <- fluidPage(
         uiOutput("radio")
       ),
       mainPanel(
-         plotOutput("acreedor")
+         plotOutput("acreedor"),
+         tableOutput("totalGastado")
       )
    )
 )
@@ -26,6 +27,16 @@ server <- function(input, output) {
         geom_bar(aes(acreedor))
     }
   })
+  
+  output$totalGastado <- renderTable({
+     data %>%
+      filter (MES %in% input$select_mes) %>%
+      arrange(desc(PAGO)) %>%
+      select(RAZÓN, TIPO, PAGO, FECHA) %>%
+      slice(1:5)
+  }
+  )
+  
   
   output$radio <- renderUI({
     choices <- setNames(unique(data$MES), unique(data$MES))
