@@ -29,16 +29,11 @@ server <- function(input, output) {
   })
   
   output$totalGastado <- renderTable({
-    
-     mes_an<-input$select_mes
-    
-     pago_mayor<- data %>%
-      filter (MES %in% mes_an) %>%
+     data %>%
+      filter (MES %in% input$select_mes) %>%
       arrange(desc(PAGO)) %>%
       select(RAZÓN, TIPO, PAGO, FECHA) %>%
       slice(1:5)
-     
-    pago_mayor
   }
   )
   
