@@ -1,13 +1,15 @@
 library(shiny)
 library(tidyverse)
 library(lubridate)
-getwd()
 
 ui <- fluidPage(
    titlePanel("Pay by month"),
    sidebarLayout(
       sidebarPanel(
         uiOutput("select"),
+        textInput(inputId = "title", 
+                   label = "Escribe un nuevo título",
+                   value = "Grafico de gastos por mes "),
         uiOutput("radio")
       ),
       mainPanel(
